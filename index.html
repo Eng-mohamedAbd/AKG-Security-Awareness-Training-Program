@@ -3,619 +3,468 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AKG IT Security Awareness | New Employee Onboarding</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<title>AKG Security Awareness Training</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0d0f14;
-    --bg2: #13161d;
-    --bg3: #1a1e28;
-    --border: rgba(255,255,255,0.07);
-    --border2: rgba(255,255,255,0.13);
-    --text: #e8eaf0;
-    --muted: #7a8099;
-    --accent: #00e5a0;
-    --accent2: #0084ff;
-    --warn: #ffaa00;
-    --danger: #ff4d4d;
-    --success: #00e5a0;
-    --mono: 'IBM Plex Mono', monospace;
-    --sans: 'IBM Plex Sans', sans-serif;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.7; min-height: 100vh; }
+:root {
+  --gold: #C39350;
+  --gold-light: #e8d5b0;
+  --navy: #0C143D;
+  --navy-mid: #1a2560;
+  --grey-light: #EFEFEF;
+  --grey-mid: #444444;
+  --white: #FFFFFF;
+  --danger: #c0392b;
+  --warn: #b7770d;
+  --success: #1a6b3c;
+  --f: 'IBM Plex Sans', sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--f); background: var(--grey-light); color: var(--grey-mid); line-height: 1.6; }
 
-  /* NAV */
-  nav { position: sticky; top: 0; z-index: 100; background: rgba(13,15,20,0.95); border-bottom: 1px solid var(--border); backdrop-filter: blur(8px); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 56px; }
-  .nav-brand { font-family: var(--mono); font-size: 13px; color: var(--accent); letter-spacing: 0.05em; }
-  .nav-progress { display: flex; align-items: center; gap: 8px; }
-  .nav-dot { width: 8px; height: 8px; border-radius: 50%; border: 1px solid var(--border2); background: transparent; transition: background 0.3s; }
-  .nav-dot.done { background: var(--accent); border-color: var(--accent); }
-  .nav-dot.active { background: var(--accent2); border-color: var(--accent2); box-shadow: 0 0 0 3px rgba(0,132,255,0.2); }
+nav {
+  background: var(--navy);
+  padding: 0 2rem;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-brand { color: var(--gold); font-size: 13px; font-weight: 600; letter-spacing: 0.06em; }
+.progress-bar { display: flex; gap: 6px; align-items: center; }
+.p-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2); transition: background 0.3s; }
+.p-dot.done { background: var(--gold); }
+.p-dot.active { background: var(--white); }
 
-  /* HERO */
-  .hero { padding: 5rem 2rem 4rem; max-width: 860px; margin: 0 auto; }
-  .hero-tag { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 8px; }
-  .hero-tag::before { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); }
-  h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 600; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1.25rem; }
-  h1 span { color: var(--accent); }
-  .hero-sub { font-size: 1rem; color: var(--muted); max-width: 560px; margin-bottom: 2.5rem; }
-  .hero-meta { display: flex; gap: 2rem; flex-wrap: wrap; }
-  .meta-item { font-family: var(--mono); font-size: 12px; color: var(--muted); }
-  .meta-item strong { color: var(--text); display: block; font-size: 16px; font-weight: 500; margin-bottom: 2px; }
-  .start-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #0d0f14; font-weight: 600; font-size: 14px; padding: 0.75rem 1.75rem; border-radius: 4px; border: none; cursor: pointer; text-decoration: none; margin-top: 2.5rem; transition: opacity 0.2s; font-family: var(--sans); }
-  .start-btn:hover { opacity: 0.88; }
-  .start-btn svg { width: 16px; height: 16px; }
+.page { display: none; max-width: 780px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+.page.active { display: block; }
 
-  /* MODULE LIST */
-  .toc { max-width: 860px; margin: 0 auto 4rem; padding: 0 2rem; }
-  .toc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1px; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
-  .toc-item { background: var(--bg2); padding: 1.25rem 1rem; cursor: pointer; transition: background 0.2s; text-align: center; }
-  .toc-item:hover { background: var(--bg3); }
-  .toc-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
-  .toc-num { font-family: var(--mono); font-size: 10px; color: var(--muted); margin-bottom: 4px; }
-  .toc-label { font-size: 13px; font-weight: 500; }
+/* HOME */
+.home-badge { display: inline-block; background: var(--navy); color: var(--gold); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; padding: 4px 12px; border-radius: 2px; margin-bottom: 1.25rem; }
+h1 { font-size: 2.2rem; font-weight: 600; color: var(--navy); line-height: 1.2; margin-bottom: 0.75rem; }
+.home-sub { font-size: 1rem; color: var(--grey-mid); margin-bottom: 2rem; max-width: 520px; }
+.meta-row { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
+.meta-box { background: var(--navy); color: var(--white); padding: 0.75rem 1.25rem; border-radius: 4px; text-align: center; }
+.meta-box strong { display: block; font-size: 1.4rem; color: var(--gold); }
+.meta-box span { font-size: 11px; opacity: 0.7; }
+.start-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--gold); color: var(--navy); font-weight: 600; font-size: 14px; padding: 0.8rem 2rem; border-radius: 4px; border: none; cursor: pointer; font-family: var(--f); }
+.start-btn:hover { background: #b08040; }
 
-  /* SECTIONS */
-  .section { max-width: 860px; margin: 0 auto; padding: 3rem 2rem; border-top: 1px solid var(--border); display: none; }
-  .section.active { display: block; }
-  .section-header { display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 2.5rem; }
-  .section-icon { font-size: 2.5rem; flex-shrink: 0; }
-  .section-num { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-bottom: 6px; }
-  h2 { font-size: 1.75rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; }
-  h3 { font-size: 1rem; font-weight: 600; margin: 1.75rem 0 0.75rem; color: var(--text); }
-  p { color: var(--muted); margin-bottom: 0.85rem; font-size: 0.95rem; }
-  p strong { color: var(--text); }
+.module-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1px; background: #d0d0d0; border: 1px solid #d0d0d0; border-radius: 6px; overflow: hidden; margin-top: 2.5rem; }
+.mod-tile { background: var(--white); padding: 1.25rem 1rem; text-align: center; cursor: pointer; transition: background 0.15s; }
+.mod-tile:hover { background: var(--grey-light); }
+.mod-num { font-size: 10px; color: var(--gold); font-weight: 600; letter-spacing: 0.08em; margin-bottom: 6px; }
+.mod-icon { font-size: 1.6rem; margin-bottom: 6px; }
+.mod-label { font-size: 12px; font-weight: 500; color: var(--navy); }
 
-  /* CALLOUT BOXES */
-  .callout { border-left: 3px solid var(--accent2); background: rgba(0,132,255,0.06); padding: 1rem 1.25rem; border-radius: 0 4px 4px 0; margin: 1.5rem 0; }
-  .callout.warn { border-color: var(--warn); background: rgba(255,170,0,0.06); }
-  .callout.danger { border-color: var(--danger); background: rgba(255,77,77,0.06); }
-  .callout.success { border-color: var(--accent); background: rgba(0,229,160,0.06); }
-  .callout-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
-  .callout.warn .callout-label { color: var(--warn); }
-  .callout.danger .callout-label { color: var(--danger); }
-  .callout.success .callout-label { color: var(--accent); }
-  .callout-label { color: var(--accent2); }
-  .callout p { margin: 0; font-size: 0.9rem; }
+/* MODULE */
+.mod-header { background: var(--navy); color: var(--white); border-radius: 6px; padding: 1.5rem; margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem; }
+.mod-header-icon { font-size: 2rem; }
+.mod-header-num { font-size: 11px; color: var(--gold); font-weight: 600; letter-spacing: 0.08em; margin-bottom: 4px; }
+.mod-header h2 { font-size: 1.4rem; color: var(--white); }
 
-  /* EXAMPLE CARDS */
-  .examples { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 1.5rem 0; }
-  @media(max-width: 560px) { .examples { grid-template-columns: 1fr; } }
-  .ex-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; }
-  .ex-card.bad { border-color: rgba(255,77,77,0.3); }
-  .ex-card.good { border-color: rgba(0,229,160,0.3); }
-  .ex-badge { font-family: var(--mono); font-size: 10px; padding: 2px 8px; border-radius: 2px; margin-bottom: 8px; display: inline-block; }
-  .ex-badge.bad { background: rgba(255,77,77,0.15); color: var(--danger); }
-  .ex-badge.good { background: rgba(0,229,160,0.15); color: var(--accent); }
-  .ex-card p { font-size: 0.88rem; margin: 0; }
+h3 { font-size: 14px; font-weight: 600; color: var(--navy); text-transform: uppercase; letter-spacing: 0.06em; margin: 2rem 0 0.75rem; border-bottom: 2px solid var(--gold); padding-bottom: 4px; display: inline-block; }
 
-  /* CHECKLIST */
-  .checklist { list-style: none; margin: 1rem 0; }
-  .checklist li { display: flex; align-items: flex-start; gap: 10px; padding: 6px 0; font-size: 0.9rem; color: var(--muted); border-bottom: 1px solid var(--border); }
-  .checklist li:last-child { border: none; }
-  .checklist li::before { content: '›'; color: var(--accent); font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+.card-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 1rem 0; }
+.card { background: var(--white); border-radius: 6px; padding: 1rem 1.1rem; border-left: 4px solid var(--gold); }
+.card.danger { border-color: var(--danger); }
+.card.warn { border-color: var(--warn); }
+.card.success { border-color: var(--success); }
+.card-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; color: var(--gold); }
+.card.danger .card-label { color: var(--danger); }
+.card.warn .card-label { color: var(--warn); }
+.card.success .card-label { color: var(--success); }
+.card p { font-size: 13px; line-height: 1.55; }
 
-  /* STEP FLOW */
-  .steps { margin: 1.5rem 0; }
-  .step { display: flex; gap: 1rem; margin-bottom: 1.25rem; }
-  .step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--bg3); border: 1px solid var(--border2); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 11px; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
-  .step-content h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 4px; }
-  .step-content p { font-size: 0.88rem; margin: 0; }
+.do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 1rem 0; }
+@media(max-width:520px) { .do-dont { grid-template-columns: 1fr; } }
+.do-card { background: #f0faf4; border: 1px solid #a8d8b9; border-radius: 6px; padding: 0.9rem; }
+.dont-card { background: #fdf0f0; border: 1px solid #e8a8a8; border-radius: 6px; padding: 0.9rem; }
+.dd-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; margin-bottom: 6px; }
+.do-card .dd-label { color: var(--success); }
+.dont-card .dd-label { color: var(--danger); }
+.dd-list { list-style: none; }
+.dd-list li { font-size: 13px; padding: 3px 0; padding-left: 14px; position: relative; }
+.dd-list li::before { position: absolute; left: 0; font-weight: 600; }
+.do-card .dd-list li::before { content: '✓'; color: var(--success); }
+.dont-card .dd-list li::before { content: '✕'; color: var(--danger); }
 
-  /* NAV BUTTONS */
-  .section-nav { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
-  .btn { font-family: var(--sans); font-size: 13px; font-weight: 500; padding: 0.6rem 1.25rem; border-radius: 4px; cursor: pointer; transition: all 0.2s; border: 1px solid var(--border2); background: transparent; color: var(--text); }
-  .btn:hover { border-color: var(--accent); color: var(--accent); }
-  .btn.primary { background: var(--accent); color: #0d0f14; border-color: var(--accent); }
-  .btn.primary:hover { opacity: 0.88; }
-  .btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.steps { margin: 1rem 0; }
+.step { display: flex; gap: 12px; margin-bottom: 12px; align-items: flex-start; }
+.step-n { width: 26px; height: 26px; border-radius: 50%; background: var(--navy); color: var(--gold); font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+.step-body { background: var(--white); border-radius: 6px; padding: 0.75rem 1rem; flex: 1; }
+.step-body strong { display: block; font-size: 13px; color: var(--navy); margin-bottom: 3px; }
+.step-body p { font-size: 12px; margin: 0; }
 
-  /* QUIZ */
-  #quiz-section { display: none; }
-  #quiz-section.active { display: block; }
-  .quiz-header { margin-bottom: 2.5rem; }
-  .q-block { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.25rem; }
-  .q-text { font-size: 0.95rem; font-weight: 500; margin-bottom: 1rem; color: var(--text); }
-  .q-num { font-family: var(--mono); font-size: 10px; color: var(--muted); margin-bottom: 8px; }
-  .q-options { display: flex; flex-direction: column; gap: 8px; }
-  .q-option { display: flex; align-items: center; gap: 12px; padding: 0.7rem 1rem; border: 1px solid var(--border); border-radius: 4px; cursor: pointer; font-size: 0.88rem; color: var(--muted); transition: all 0.2s; }
-  .q-option:hover { border-color: var(--border2); color: var(--text); }
-  .q-option input { accent-color: var(--accent); }
-  .q-option.selected { border-color: var(--accent2); color: var(--text); background: rgba(0,132,255,0.06); }
-  .q-option.correct { border-color: var(--accent) !important; background: rgba(0,229,160,0.08) !important; color: var(--accent) !important; }
-  .q-option.wrong { border-color: var(--danger) !important; background: rgba(255,77,77,0.08) !important; color: var(--danger) !important; }
-  .q-feedback { font-family: var(--mono); font-size: 11px; margin-top: 10px; padding: 8px 12px; border-radius: 3px; display: none; }
-  .q-feedback.show { display: block; }
-  .q-feedback.ok { background: rgba(0,229,160,0.1); color: var(--accent); }
-  .q-feedback.fail { background: rgba(255,77,77,0.1); color: var(--danger); }
+.rule-box { background: var(--navy); color: var(--white); border-radius: 6px; padding: 1rem 1.25rem; margin: 1.5rem 0; border-left: 4px solid var(--gold); }
+.rule-box .card-label { color: var(--gold); }
+.rule-box p { font-size: 13px; color: rgba(255,255,255,0.85); }
+.rule-box strong { color: var(--white); }
 
-  /* RESULT */
-  .result-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 3rem 2rem; text-align: center; margin: 2rem 0; }
-  .result-score { font-family: var(--mono); font-size: 3.5rem; font-weight: 500; margin-bottom: 0.5rem; }
-  .result-score.pass { color: var(--accent); }
-  .result-score.fail { color: var(--danger); }
-  .result-label { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-bottom: 1.5rem; letter-spacing: 0.08em; }
-  .result-verdict { font-size: 1.1rem; font-weight: 500; margin-bottom: 0.5rem; }
-  .result-sub { font-size: 0.88rem; color: var(--muted); }
+.tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 0.75rem 0; }
+.tag { background: var(--white); border: 1px solid #d0d0d0; border-radius: 4px; padding: 5px 10px; font-size: 12px; color: var(--grey-mid); }
+.tag.warn { background: #fff8e6; border-color: #e8c870; color: #7a5000; }
+.tag.danger { background: #fdf0f0; border-color: #e8a8a8; color: #8a1a1a; }
 
-  /* COMPLETION */
-  .completion-banner { background: linear-gradient(135deg, rgba(0,229,160,0.08), rgba(0,132,255,0.06)); border: 1px solid rgba(0,229,160,0.2); border-radius: 8px; padding: 2rem; text-align: center; }
-  .cert-icon { font-size: 3rem; margin-bottom: 1rem; }
-  .cert-title { font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; }
-  .cert-sub { color: var(--muted); font-size: 0.9rem; }
-  .cert-date { font-family: var(--mono); font-size: 11px; color: var(--accent); margin-top: 1rem; }
+.nav-btns { display: flex; justify-content: space-between; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid #d0d0d0; }
+.btn { font-family: var(--f); font-size: 13px; font-weight: 500; padding: 0.6rem 1.25rem; border-radius: 4px; cursor: pointer; border: 1.5px solid var(--navy); background: transparent; color: var(--navy); transition: all 0.15s; }
+.btn:hover { background: var(--navy); color: var(--white); }
+.btn.primary { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+.btn.primary:hover { background: #b08040; border-color: #b08040; }
 
-  .hidden { display: none !important; }
-  #quiz-submit { margin-top: 2rem; }
+/* QUIZ */
+.quiz-intro { background: var(--navy); color: var(--white); border-radius: 6px; padding: 1.5rem; margin-bottom: 2rem; }
+.quiz-intro h2 { color: var(--white); font-size: 1.3rem; margin-bottom: 6px; }
+.quiz-intro p { font-size: 13px; color: rgba(255,255,255,0.75); }
+.quiz-meta { display: flex; gap: 1rem; margin-top: 10px; flex-wrap: wrap; }
+.quiz-meta span { background: rgba(195,147,80,0.25); color: var(--gold); font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 3px; }
+
+.q-block { background: var(--white); border-radius: 6px; padding: 1.25rem; margin-bottom: 1rem; border: 1px solid #d8d8d8; }
+.q-num { font-size: 10px; font-weight: 600; color: var(--gold); letter-spacing: 0.08em; margin-bottom: 8px; }
+.q-text { font-size: 14px; font-weight: 500; color: var(--navy); margin-bottom: 1rem; line-height: 1.5; }
+.q-opts { display: flex; flex-direction: column; gap: 6px; }
+.q-opt { display: flex; align-items: center; gap: 10px; padding: 0.65rem 0.9rem; border: 1px solid #d8d8d8; border-radius: 4px; cursor: pointer; font-size: 13px; color: var(--grey-mid); transition: all 0.15s; }
+.q-opt:hover { border-color: var(--navy); color: var(--navy); }
+.q-opt input { accent-color: var(--gold); }
+.q-opt.correct { border-color: var(--success); background: #f0faf4; color: var(--success); font-weight: 500; }
+.q-opt.wrong { border-color: var(--danger); background: #fdf0f0; color: var(--danger); }
+.q-fb { font-size: 12px; margin-top: 10px; padding: 8px 10px; border-radius: 4px; display: none; }
+.q-fb.show { display: block; }
+.q-fb.ok { background: #f0faf4; color: var(--success); border-left: 3px solid var(--success); }
+.q-fb.fail { background: #fdf0f0; color: var(--danger); border-left: 3px solid var(--danger); }
+
+.result-box { background: var(--white); border-radius: 6px; padding: 2rem; text-align: center; border: 2px solid var(--gold); margin: 1.5rem 0; }
+.result-score { font-size: 3rem; font-weight: 600; color: var(--navy); }
+.result-score.pass { color: var(--success); }
+.result-score.fail { color: var(--danger); }
+.result-verdict { font-size: 1rem; font-weight: 600; margin: 6px 0 4px; }
+.result-sub { font-size: 13px; color: var(--grey-mid); }
+
+.cert { background: var(--navy); border-radius: 6px; padding: 2rem; text-align: center; margin-top: 1rem; border: 2px solid var(--gold); }
+.cert-icon { font-size: 2.5rem; margin-bottom: 10px; }
+.cert-title { font-size: 1.1rem; font-weight: 600; color: var(--gold); margin-bottom: 6px; }
+.cert-sub { font-size: 13px; color: rgba(255,255,255,0.7); }
+.cert-date { font-size: 11px; color: var(--gold); margin-top: 10px; opacity: 0.8; }
+
+.hidden { display: none !important; }
+p { font-size: 14px; margin-bottom: 0.6rem; }
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="nav-brand">AKG // IT-SEC-AWARE-01</div>
-  <div class="nav-progress" id="nav-dots"></div>
+  <div class="nav-brand">AKG // Security Awareness</div>
+  <div class="progress-bar" id="pdots"></div>
 </nav>
 
-<!-- HERO -->
-<div id="home-section" class="active">
-  <div class="hero">
-    <div class="hero-tag">New Employee Onboarding</div>
-    <h1>Security Awareness<br><span>Training Program</span></h1>
-    <p class="hero-sub">Mandatory baseline training for all AKG employees. Complete all five modules and pass the final assessment to receive your onboarding security certification.</p>
-    <div class="hero-meta">
-      <div class="meta-item"><strong>5</strong> Modules</div>
-      <div class="meta-item"><strong>~30 min</strong> Est. Duration</div>
-      <div class="meta-item"><strong>70%</strong> Pass Threshold</div>
-      <div class="meta-item"><strong>10</strong> Quiz Questions</div>
-    </div>
-    <button class="start-btn" onclick="goTo(1)">
-      Begin Training
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-    </button>
+<!-- HOME -->
+<div class="page active" id="p0">
+  <div class="home-badge">New Employee Onboarding</div>
+  <h1>Security Awareness<br>Training</h1>
+  <p class="home-sub">Complete all 5 modules, then pass the final quiz to receive your onboarding security certification.</p>
+  <div class="meta-row">
+    <div class="meta-box"><strong>5</strong><span>Modules</span></div>
+    <div class="meta-box"><strong>~30 min</strong><span>Duration</span></div>
+    <div class="meta-box"><strong>70%</strong><span>Pass mark</span></div>
+    <div class="meta-box"><strong>10</strong><span>Questions</span></div>
   </div>
-
-  <div class="toc">
-    <div class="toc-grid">
-      <div class="toc-item" onclick="goTo(1)"><div class="toc-icon">🎣</div><div class="toc-num">01</div><div class="toc-label">Phishing &amp; Social Engineering</div></div>
-      <div class="toc-item" onclick="goTo(2)"><div class="toc-icon">🔐</div><div class="toc-num">02</div><div class="toc-label">Password &amp; MFA Policy</div></div>
-      <div class="toc-item" onclick="goTo(3)"><div class="toc-icon">📋</div><div class="toc-num">03</div><div class="toc-label">Acceptable Use Policy</div></div>
-      <div class="toc-item" onclick="goTo(4)"><div class="toc-icon">🚨</div><div class="toc-num">04</div><div class="toc-label">Incident Reporting</div></div>
-      <div class="toc-item" onclick="goTo(5)"><div class="toc-icon">🏢</div><div class="toc-num">05</div><div class="toc-label">Physical Security</div></div>
-      <div class="toc-item" onclick="goTo(6)"><div class="toc-icon">✅</div><div class="toc-num">Quiz</div><div class="toc-label">Knowledge Assessment</div></div>
-    </div>
+  <button class="start-btn" onclick="go(1)">Start Training →</button>
+  <div class="module-grid">
+    <div class="mod-tile" onclick="go(1)"><div class="mod-num">01</div><div class="mod-icon">🎣</div><div class="mod-label">Phishing &amp; Social Engineering</div></div>
+    <div class="mod-tile" onclick="go(2)"><div class="mod-num">02</div><div class="mod-icon">🔐</div><div class="mod-label">Password &amp; MFA Policy</div></div>
+    <div class="mod-tile" onclick="go(3)"><div class="mod-num">03</div><div class="mod-icon">📋</div><div class="mod-label">Acceptable Use Policy</div></div>
+    <div class="mod-tile" onclick="go(4)"><div class="mod-num">04</div><div class="mod-icon">🚨</div><div class="mod-label">Incident Reporting</div></div>
+    <div class="mod-tile" onclick="go(5)"><div class="mod-num">05</div><div class="mod-icon">🏢</div><div class="mod-label">Physical Security</div></div>
+    <div class="mod-tile" onclick="go(6)"><div class="mod-num">Quiz</div><div class="mod-icon">✅</div><div class="mod-label">Knowledge Assessment</div></div>
   </div>
 </div>
 
-<!-- MODULE 1: PHISHING -->
-<div id="section-1" class="section">
-  <div class="section-header">
-    <div class="section-icon">🎣</div>
-    <div><div class="section-num">Module 01 / 05</div><h2>Phishing &amp; Social Engineering</h2></div>
+<!-- MODULE 1 -->
+<div class="page" id="p1">
+  <div class="mod-header"><div class="mod-header-icon">🎣</div><div><div class="mod-header-num">Module 01 of 05</div><h2>Phishing &amp; Social Engineering</h2></div></div>
+
+  <p>Phishing is the most common way attackers target AKG. They pretend to be a trusted person or service to steal your credentials or trick you into clicking a malicious link.</p>
+
+  <h3>How to spot a phishing email</h3>
+  <div class="tag-list">
+    <div class="tag warn">Suspicious sender domain</div>
+    <div class="tag warn">Urgent or threatening language</div>
+    <div class="tag warn">Unexpected password reset</div>
+    <div class="tag warn">Link URL doesn't match text</div>
+    <div class="tag warn">Request to bypass normal process</div>
+    <div class="tag warn">Changed invoice bank details</div>
+    <div class="tag warn">Unexpected attachment</div>
   </div>
 
-  <p>Phishing remains the most common initial attack vector against organizations. At AKG, over <strong>80% of security incidents</strong> begin with a phishing email or social engineering attempt. Your ability to detect and report these attempts is the first line of defense.</p>
-
-  <h3>What is phishing?</h3>
-  <p>Phishing is a deceptive attack in which an adversary impersonates a trusted entity — a colleague, vendor, Microsoft, or even AKG's own IT department — to trick you into revealing credentials, clicking a malicious link, or transferring funds.</p>
-
-  <div class="callout warn">
-    <div class="callout-label">High Risk</div>
-    <p>Spear phishing attacks are targeted. Attackers will research your name, role, and manager from LinkedIn before crafting a convincing message. Assume personalization does not equal legitimacy.</p>
+  <h3>Real example</h3>
+  <div class="do-dont">
+    <div class="dont-card"><div class="dd-label">Phishing</div><ul class="dd-list"><li>From: it-support@akg-helpdesk.net</li><li>"Your VPN expired. Click here to reactivate in 24 hours."</li></ul></div>
+    <div class="do-card"><div class="dd-label">Legitimate</div><ul class="dd-list"><li>From: helpdesk@akg.com</li><li>"Update your VPN via Software Center → search GlobalProtect."</li></ul></div>
   </div>
 
-  <h3>Red flags to identify</h3>
-  <ul class="checklist">
-    <li>Sender email domain doesn't match the organization it claims to be from</li>
-    <li>Urgent or threatening language: "Your account will be suspended in 2 hours"</li>
-    <li>Unexpected password reset, MFA prompt, or DocuSign requests</li>
-    <li>Links that don't match their display text (hover before clicking)</li>
-    <li>Requests to bypass normal process — "Don't create a ticket, just send me the file"</li>
-    <li>Invoices or wire transfer requests with changed banking details</li>
-    <li>Unsolicited attachments, even from known senders (their account may be compromised)</li>
-  </ul>
-
-  <h3>Real-world examples</h3>
-  <div class="examples">
-    <div class="ex-card bad">
-      <span class="ex-badge bad">Phishing</span>
-      <p><strong>From:</strong> it-support@akg-helpdesk.net<br><br>"Your VPN license expired. Click here to reactivate within 24 hours or lose access."</p>
-    </div>
-    <div class="ex-card good">
-      <span class="ex-badge good">Legitimate</span>
-      <p><strong>From:</strong> helpdesk@akg.com<br><br>"Your VPN client needs updating. Please open the Software Center and search for 'GlobalProtect'."</p>
-    </div>
+  <h3>Other attack types</h3>
+  <div class="card-row">
+    <div class="card warn"><div class="card-label">Phone (Vishing)</div><p>"This is IT. We need your password to fix your account."</p></div>
+    <div class="card warn"><div class="card-label">Executive fraud (BEC)</div><p>Fake CEO email requesting urgent wire transfer.</p></div>
+    <div class="card warn"><div class="card-label">Tailgating</div><p>Unknown person asks you to hold a secure door.</p></div>
   </div>
 
-  <h3>Social engineering tactics</h3>
-  <p>Beyond email, attackers use phone calls (vishing), SMS (smishing), and in-person pretexting. Common scenarios at corporate environments include:</p>
-  <ul class="checklist">
-    <li><strong>IT impersonation:</strong> "This is IT, we need your credentials to fix an issue on your account"</li>
-    <li><strong>Executive fraud (BEC):</strong> Impersonating the CEO to request urgent wire transfers</li>
-    <li><strong>Vendor pretexting:</strong> Fake supplier calls requesting updated payment details</li>
-    <li><strong>Tailgating requests:</strong> Unknown person asking you to hold a secure door for them</li>
-  </ul>
-
-  <div class="callout success">
-    <div class="callout-label">Rule</div>
-    <p>IT will <strong>never</strong> ask for your password — by phone, email, or chat. If anyone requests your credentials, refuse and report to <strong>it-security@akg.com</strong> immediately.</p>
-  </div>
-
-  <h3>What to do with a suspicious email</h3>
+  <h3>What to do</h3>
   <div class="steps">
-    <div class="step"><div class="step-num">1</div><div class="step-content"><h4>Do not click any links or open attachments</h4><p>Even "unsubscribe" links in suspicious emails can confirm your address is active.</p></div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-content"><h4>Use the "Report Phishing" button in Outlook</h4><p>This sends the email to the security team for analysis and removes it from your inbox.</p></div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-content"><h4>If you clicked a link — report immediately</h4><p>Don't wait. Contact IT Security at ext. 2200 or it-security@akg.com. Early reporting limits damage significantly.</p></div></div>
+    <div class="step"><div class="step-n">1</div><div class="step-body"><strong>Don't click anything</strong><p>Not links, not attachments, not even "unsubscribe".</p></div></div>
+    <div class="step"><div class="step-n">2</div><div class="step-body"><strong>Click "Report Phishing" in Outlook</strong><p>Notifies IT Security and removes the email from your inbox.</p></div></div>
+    <div class="step"><div class="step-n">3</div><div class="step-body"><strong>If you already clicked — call IT now</strong><p>Ext. 2200 or it-security@akg.com. Early reporting limits the damage.</p></div></div>
   </div>
 
-  <div class="section-nav">
-    <button class="btn" onclick="goTo(0)">← Home</button>
-    <button class="btn primary" onclick="goTo(2)">Next Module →</button>
-  </div>
+  <div class="rule-box"><div class="card-label">Golden rule</div><p>IT will <strong>never</strong> ask for your password — by phone, email, or chat. Always refuse and report.</p></div>
+
+  <div class="nav-btns"><button class="btn" onclick="go(0)">← Home</button><button class="btn primary" onclick="go(2)">Next →</button></div>
 </div>
 
-<!-- MODULE 2: PASSWORD & MFA -->
-<div id="section-2" class="section">
-  <div class="section-header">
-    <div class="section-icon">🔐</div>
-    <div><div class="section-num">Module 02 / 05</div><h2>Password &amp; MFA Policy</h2></div>
+<!-- MODULE 2 -->
+<div class="page" id="p2">
+  <div class="mod-header"><div class="mod-header-icon">🔐</div><div><div class="mod-header-num">Module 02 of 05</div><h2>Password &amp; MFA Policy</h2></div></div>
+
+  <p>Stolen credentials are behind most unauthorized access incidents. AKG enforces strict password and MFA requirements on all systems.</p>
+
+  <h3>Password rules</h3>
+  <div class="do-dont">
+    <div class="do-card"><div class="dd-label">Required</div><ul class="dd-list"><li>Minimum 14 characters</li><li>Uppercase + lowercase + digit + symbol</li><li>Changed every 90 days</li><li>Use an approved password manager</li></ul></div>
+    <div class="dont-card"><div class="dd-label">Prohibited</div><ul class="dd-list"><li>Using your name or "AKG" in password</li><li>Reusing your last 12 passwords</li><li>Sharing your password with anyone</li><li>Writing passwords on sticky notes</li></ul></div>
   </div>
 
-  <p>Credential theft is responsible for the majority of unauthorized access incidents. AKG enforces a strict password and authentication policy across all systems. Compliance is mandatory and audited.</p>
-
-  <h3>AKG password requirements</h3>
-  <ul class="checklist">
-    <li>Minimum <strong>14 characters</strong> for all corporate accounts</li>
-    <li>Must include uppercase, lowercase, digit, and special character</li>
-    <li>Passwords expire every <strong>90 days</strong> — use a password manager to handle this</li>
-    <li>No reuse of the last 12 passwords</li>
-    <li>No use of your name, username, or "AKG" in any password</li>
-    <li>Never share passwords with colleagues — even temporarily, even for coverage</li>
-  </ul>
-
-  <div class="callout warn">
-    <div class="callout-label">Policy</div>
-    <p>Sharing credentials is a policy violation regardless of intent. If a colleague needs access, submit an access request via the IT portal — not by sharing your password.</p>
+  <div class="card-row">
+    <div class="card danger"><div class="card-label">Weak — don't use</div><p><strong>AKG2024!</strong> — Dictionary word + year. Cracked instantly.</p></div>
+    <div class="card success"><div class="card-label">Strong — use this style</div><p><strong>Tr!#9vKm@wqLz4</strong> — Random, 14+ chars. Store in password manager.</p></div>
   </div>
 
-  <h3>Use a password manager</h3>
-  <p>You are expected to use <strong>KeePass</strong> (corporate-approved) or <strong>Bitwarden</strong> for managing credentials. These eliminate the need to memorize complex passwords and prevent password reuse across systems.</p>
+  <h3>Password manager</h3>
+  <p>Use <strong>KeePass</strong> (offline) or <strong>Bitwarden</strong> (cloud-synced). Both are corporate-approved. Contact IT Helpdesk if you need setup help.</p>
 
-  <div class="examples">
-    <div class="ex-card bad">
-      <span class="ex-badge bad">Weak</span>
-      <p>AKG2024! — Dictionary word + year pattern. Cracked in seconds with standard tools.</p>
-    </div>
-    <div class="ex-card good">
-      <span class="ex-badge good">Strong</span>
-      <p>Tr!#9vKm@wqLz4 — Random, 14+ chars, no pattern. Use a password manager to store it.</p>
-    </div>
-  </div>
-
-  <h3>Multi-Factor Authentication (MFA)</h3>
-  <p>MFA is mandatory on all AKG systems — VPN, Microsoft 365, Azure, and internal applications. MFA adds a second layer that renders stolen passwords largely useless.</p>
-
-  <ul class="checklist">
-    <li>Enroll in <strong>Microsoft Authenticator</strong> within your first day</li>
-    <li>Use app-based TOTP — SMS-based OTP is no longer accepted on critical systems</li>
-    <li>Never approve an MFA prompt you did not initiate — this is an MFA fatigue attack</li>
-    <li>If you receive unexpected MFA prompts, change your password and report to IT immediately</li>
-  </ul>
-
-  <div class="callout danger">
-    <div class="callout-label">Attack Vector</div>
-    <p><strong>MFA fatigue:</strong> Attackers send repeated push notifications hoping you'll click "Approve" to stop the noise. Always confirm the request code matches what's on screen before approving.</p>
-  </div>
-
-  <h3>Privileged accounts</h3>
-  <p>If your role requires admin or elevated-privilege accounts, additional requirements apply: separate credentials for privileged access, Privileged Access Workstation (PAW) usage for sensitive tasks, and quarterly access reviews.</p>
-
-  <div class="section-nav">
-    <button class="btn" onclick="goTo(1)">← Previous</button>
-    <button class="btn primary" onclick="goTo(3)">Next Module →</button>
-  </div>
-</div>
-
-<!-- MODULE 3: AUP -->
-<div id="section-3" class="section">
-  <div class="section-header">
-    <div class="section-icon">📋</div>
-    <div><div class="section-num">Module 03 / 05</div><h2>Acceptable Use Policy</h2></div>
-  </div>
-
-  <p>The AKG Acceptable Use Policy (AUP) defines the boundaries for using company-owned technology, networks, and data. Violations can result in disciplinary action up to and including termination and legal liability.</p>
-
-  <h3>Company assets — what's permitted</h3>
-  <ul class="checklist">
-    <li>Use corporate devices primarily for business purposes</li>
-    <li>Limited personal browsing is tolerated provided it does not impact performance or security</li>
-    <li>Install only pre-approved software via the Software Center — no unauthorized installations</li>
-    <li>Connect only to trusted networks; always use VPN when working outside AKG premises</li>
-    <li>Corporate email is to be used for business communications only</li>
-  </ul>
-
-  <h3>Prohibited activities</h3>
-  <ul class="checklist">
-    <li>Installing unlicensed software, pirated content, or personal applications (gaming, P2P)</li>
-    <li>Accessing, storing, or transmitting pornographic or otherwise offensive content</li>
-    <li>Using company resources for personal business or side projects</li>
-    <li>Circumventing security controls — disabling AV, using a personal VPN, using Tor</li>
-    <li>Connecting unauthorized devices (personal USB drives, mobile hotspots) to the corporate network</li>
-    <li>Storing sensitive AKG data on personal devices, Google Drive, or unapproved cloud services</li>
-    <li>Using personal email accounts to send or receive work-related documents</li>
-  </ul>
-
-  <div class="callout danger">
-    <div class="callout-label">Zero Tolerance</div>
-    <p>Disabling or attempting to bypass security controls (EDR, DLP, firewall) is a zero-tolerance violation. This applies even if the intent was productivity-related.</p>
-  </div>
-
-  <h3>Data handling obligations</h3>
-  <p>All AKG data must be classified and handled according to its classification level. As a new employee, assume any document you work with is at minimum <strong>Internal</strong> unless labelled otherwise.</p>
-
-  <ul class="checklist">
-    <li><strong>Public:</strong> No restrictions — approved marketing materials, public documentation</li>
-    <li><strong>Internal:</strong> AKG employees only — do not share externally without authorization</li>
-    <li><strong>Confidential:</strong> Need-to-know basis — contracts, financials, HR records</li>
-    <li><strong>Restricted:</strong> Requires explicit approval — PII, customer data, security configurations</li>
-  </ul>
-
-  <div class="callout">
-    <div class="callout-label">Note</div>
-    <p>When in doubt about whether you're permitted to share a document, ask your manager or submit a request to it-security@akg.com before sending. It's always better to verify first.</p>
-  </div>
-
-  <div class="section-nav">
-    <button class="btn" onclick="goTo(2)">← Previous</button>
-    <button class="btn primary" onclick="goTo(4)">Next Module →</button>
-  </div>
-</div>
-
-<!-- MODULE 4: INCIDENT REPORTING -->
-<div id="section-4" class="section">
-  <div class="section-header">
-    <div class="section-icon">🚨</div>
-    <div><div class="section-num">Module 04 / 05</div><h2>Incident Reporting</h2></div>
-  </div>
-
-  <p>Early incident reporting dramatically reduces the impact of security events. The average organization that detects a breach quickly contains it in <strong>days</strong>; organizations that discover breaches late take <strong>months</strong>. You are part of AKG's detection capability.</p>
-
-  <h3>What qualifies as a security incident?</h3>
-  <ul class="checklist">
-    <li>Received or clicked a phishing email or suspicious link</li>
-    <li>Unexpected MFA prompts or account lockouts you did not trigger</li>
-    <li>Antivirus or EDR alert on your device</li>
-    <li>Unusual device behavior — high CPU, slow network, unknown processes</li>
-    <li>Lost or stolen laptop, phone, or smart card/access badge</li>
-    <li>Unauthorized person asking for system access or credentials</li>
-    <li>Accidental disclosure of sensitive data to the wrong recipient</li>
-  </ul>
-
-  <div class="callout danger">
-    <div class="callout-label">Critical</div>
-    <p>Never attempt to investigate or remediate a suspected incident on your own. Doing so can destroy forensic evidence and worsen containment. Report — do not touch.</p>
-  </div>
-
-  <h3>How to report an incident</h3>
+  <h3>MFA — mandatory on all systems</h3>
   <div class="steps">
-    <div class="step"><div class="step-num">1</div><div class="step-content"><h4>Immediate: Call IT Security</h4><p>Internal extension: <strong>2200</strong>. For critical incidents (active breach, ransomware), call immediately — do not rely on email.</p></div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-content"><h4>Email: it-security@akg.com</h4><p>For non-urgent incidents. Include: what happened, when, what systems or data are involved, and any screenshots.</p></div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-content"><h4>Portal: Submit a Security Incident Ticket</h4><p>Go to the IT portal → Security → Report Incident. Use this for formal documentation alongside phone/email reporting.</p></div></div>
-    <div class="step"><div class="step-num">4</div><div class="step-content"><h4>Do not discuss externally</h4><p>Do not discuss potential incidents with non-IT staff, clients, or on social media until authorized by IT Security or management.</p></div></div>
+    <div class="step"><div class="step-n">1</div><div class="step-body"><strong>Enrol in Microsoft Authenticator on Day 1</strong><p>Required for VPN, Microsoft 365, Azure, and all internal apps.</p></div></div>
+    <div class="step"><div class="step-n">2</div><div class="step-body"><strong>Use app-based TOTP — not SMS</strong><p>SMS OTP is no longer accepted on critical AKG systems.</p></div></div>
+    <div class="step"><div class="step-n">3</div><div class="step-body"><strong>Never approve a prompt you didn't initiate</strong><p>Verify the number on-screen matches the Authenticator code before approving.</p></div></div>
   </div>
 
-  <h3>No-blame culture</h3>
-  <p>AKG operates a <strong>no-blame policy</strong> for security incidents reported in good faith. If you clicked a phishing link, you will not face disciplinary action for reporting it. Delays in reporting, however, can result in significantly worse outcomes — and may be treated differently.</p>
+  <div class="rule-box"><div class="card-label">MFA Fatigue Attack</div><p>Attackers send repeated push notifications hoping you'll tap "Approve" to stop them. If you get unexpected prompts — <strong>deny all, change your password, call IT immediately.</strong></p></div>
 
-  <div class="callout success">
-    <div class="callout-label">Remember</div>
-    <p>There are no stupid incident reports. False positives are welcome — they are far better than missed detections. When in doubt, report it.</p>
-  </div>
-
-  <div class="section-nav">
-    <button class="btn" onclick="goTo(3)">← Previous</button>
-    <button class="btn primary" onclick="goTo(5)">Next Module →</button>
-  </div>
+  <div class="nav-btns"><button class="btn" onclick="go(1)">← Previous</button><button class="btn primary" onclick="go(3)">Next →</button></div>
 </div>
 
-<!-- MODULE 5: PHYSICAL SECURITY -->
-<div id="section-5" class="section">
-  <div class="section-header">
-    <div class="section-icon">🏢</div>
-    <div><div class="section-num">Module 05 / 05</div><h2>Physical Security &amp; Clean Desk</h2></div>
+<!-- MODULE 3 -->
+<div class="page" id="p3">
+  <div class="mod-header"><div class="mod-header-icon">📋</div><div><div class="mod-header-num">Module 03 of 05</div><h2>Acceptable Use Policy</h2></div></div>
+
+  <p>The AKG Acceptable Use Policy (AUP) defines how you may use company devices, networks, and data. Violations can lead to disciplinary action — or legal liability.</p>
+
+  <h3>Allowed vs. not allowed</h3>
+  <div class="do-dont">
+    <div class="do-card"><div class="dd-label">Permitted</div><ul class="dd-list"><li>Business use of corporate devices</li><li>Brief personal browsing during breaks</li><li>Software from the Software Center only</li><li>VPN when working remotely</li></ul></div>
+    <div class="dont-card"><div class="dd-label">Prohibited</div><ul class="dd-list"><li>Installing unauthorized software</li><li>Personal USB drives on corporate network</li><li>Storing work data on personal cloud (Google Drive, Dropbox)</li><li>Disabling antivirus or security tools</li><li>Using personal email for work documents</li></ul></div>
   </div>
 
-  <p>Digital security controls are meaningless if an unauthorized person can walk up to an unlocked workstation or pick up a confidential document left on a desk. Physical security is as important as your firewall.</p>
+  <div class="rule-box"><div class="card-label">Zero tolerance</div><p>Bypassing or disabling security controls is a zero-tolerance violation — even if your intent was productivity.</p></div>
 
-  <h3>Access control</h3>
-  <ul class="checklist">
-    <li>Your access badge is personal — never lend it to anyone, including colleagues</li>
-    <li>Report a lost or stolen badge immediately to reception <strong>and</strong> IT Security</li>
-    <li>Do not allow tailgating through secured doors, even if the person looks like they belong</li>
-    <li>Escort all visitors at all times while inside AKG premises</li>
-    <li>Visitor badges must be visible — challenge any visitor without a visible badge politely</li>
-  </ul>
-
-  <div class="callout warn">
-    <div class="callout-label">Social Engineering Risk</div>
-    <p>Tailgating is a common social engineering tactic. A well-dressed individual carrying boxes and acting confident counts on you feeling rude to challenge them. Always verify.</p>
+  <h3>Data classification</h3>
+  <div class="card-row">
+    <div class="card"><div class="card-label">Public</div><p>No restrictions. Approved marketing content only.</p></div>
+    <div class="card warn"><div class="card-label">Internal</div><p>AKG employees only. Do not share externally without permission.</p></div>
+    <div class="card warn"><div class="card-label">Confidential</div><p>Need-to-know. Contracts, financials, HR records.</p></div>
+    <div class="card danger"><div class="card-label">Restricted</div><p>PII, customer data, security configs. Written approval required.</p></div>
   </div>
 
-  <h3>Clean desk policy</h3>
-  <p>All employees are required to maintain a clean desk at all times when away from their workstation — even for short periods.</p>
-  <ul class="checklist">
-    <li>Lock your screen before leaving your desk: <strong>Windows key + L</strong></li>
-    <li>Store sensitive documents in locked drawers when not in use</li>
-    <li>Shred documents containing sensitive, confidential, or restricted information — never bin them</li>
-    <li>Do not write passwords on sticky notes or leave them near your workstation</li>
-    <li>Clear your desk at end of day — no documents, removable media, or handwritten notes left out</li>
-  </ul>
+  <p>When in doubt about a document's classification — treat it as <strong>Internal</strong> and ask before sharing.</p>
 
-  <h3>Workstation security</h3>
-  <ul class="checklist">
-    <li>Screen lock triggers automatically after <strong>5 minutes</strong> of inactivity — do not disable this</li>
-    <li>Do not leave sensitive data visible on screen in open-plan or public areas (use a privacy screen)</li>
-    <li>Do not plug in unknown USB devices — USB drops are a real attack vector</li>
-    <li>Secure your laptop with a Kensington lock when working in shared or public spaces</li>
-  </ul>
+  <div class="nav-btns"><button class="btn" onclick="go(2)">← Previous</button><button class="btn primary" onclick="go(4)">Next →</button></div>
+</div>
 
-  <div class="callout success">
-    <div class="callout-label">Daily Habit</div>
-    <p>Before you leave your desk: lock your screen, file or shred documents, and do a quick visual check of your desk surface. Make it automatic.</p>
+<!-- MODULE 4 -->
+<div class="page" id="p4">
+  <div class="mod-header"><div class="mod-header-icon">🚨</div><div><div class="mod-header-num">Module 04 of 05</div><h2>Incident Reporting</h2></div></div>
+
+  <p>The faster you report a security incident, the less damage it causes. You don't need to be certain — if something feels wrong, report it.</p>
+
+  <h3>What to report</h3>
+  <div class="tag-list">
+    <div class="tag warn">Clicked a phishing link</div>
+    <div class="tag warn">Unexpected MFA prompts</div>
+    <div class="tag warn">Antivirus or EDR alert</div>
+    <div class="tag warn">Unusual device behaviour</div>
+    <div class="tag warn">Lost or stolen device/badge</div>
+    <div class="tag warn">Someone asking for your credentials</div>
+    <div class="tag warn">Wrong email recipient for sensitive data</div>
   </div>
 
-  <div class="section-nav">
-    <button class="btn" onclick="goTo(4)">← Previous</button>
-    <button class="btn primary" onclick="goTo(6)">Take the Quiz →</button>
+  <div class="rule-box"><div class="card-label">Important</div><p><strong>Never try to fix it yourself.</strong> Doing so can destroy forensic evidence. Report first — IT Security will guide you through next steps.</p></div>
+
+  <h3>How to report</h3>
+  <div class="steps">
+    <div class="step"><div class="step-n">1</div><div class="step-body"><strong>Critical incident? Call immediately</strong><p>IT Security: Ext. 2200 — for active breaches, ransomware, stolen devices.</p></div></div>
+    <div class="step"><div class="step-n">2</div><div class="step-body"><strong>Non-urgent? Email IT Security</strong><p>it-security@akg.com — include what happened, when, and which systems are involved.</p></div></div>
+    <div class="step"><div class="step-n">3</div><div class="step-body"><strong>Always raise a ticket</strong><p>IT Portal → Security → Report Incident — even if you already called.</p></div></div>
+    <div class="step"><div class="step-n">4</div><div class="step-body"><strong>Don't discuss it externally</strong><p>No social media, no client calls — until IT Security says it's cleared.</p></div></div>
   </div>
+
+  <div class="card success"><div class="card-label">No-blame policy</div><p>If you report in good faith, you will not face disciplinary action — even if you clicked something. Reporting late is the problem, not the click.</p></div>
+
+  <div class="nav-btns"><button class="btn" onclick="go(3)">← Previous</button><button class="btn primary" onclick="go(5)">Next →</button></div>
+</div>
+
+<!-- MODULE 5 -->
+<div class="page" id="p5">
+  <div class="mod-header"><div class="mod-header-icon">🏢</div><div><div class="mod-header-num">Module 05 of 05</div><h2>Physical Security &amp; Clean Desk</h2></div></div>
+
+  <p>No firewall protects an unlocked screen or a confidential document left on a desk. Physical security is everyone's responsibility.</p>
+
+  <h3>Access badge rules</h3>
+  <div class="do-dont">
+    <div class="do-card"><div class="dd-label">Do</div><ul class="dd-list"><li>Keep your badge on you at all times</li><li>Report a lost badge immediately — Reception + IT Ext. 2200</li><li>Challenge anyone without a visible visitor badge</li></ul></div>
+    <div class="dont-card"><div class="dd-label">Don't</div><ul class="dd-list"><li>Lend your badge to anyone — including colleagues</li><li>Allow tailgating through secured doors</li><li>Leave visitors unescorted inside AKG premises</li></ul></div>
+  </div>
+
+  <h3>Clean desk — every time you leave your desk</h3>
+  <div class="steps">
+    <div class="step"><div class="step-n">1</div><div class="step-body"><strong>Lock your screen: Windows + L</strong><p>Auto-lock activates after 5 minutes — but don't wait for it.</p></div></div>
+    <div class="step"><div class="step-n">2</div><div class="step-body"><strong>File or lock away documents</strong><p>Sensitive documents go in your locked drawer — not left on your desk.</p></div></div>
+    <div class="step"><div class="step-n">3</div><div class="step-body"><strong>Shred, don't bin</strong><p>Any document with Internal, Confidential, or Restricted data must be shredded.</p></div></div>
+  </div>
+
+  <h3>USB drop attacks</h3>
+  <div class="card danger"><div class="card-label">Real attack technique</div><p>Attackers leave labelled USB drives (e.g. "AKG Salaries 2026") in car parks hoping curiosity wins. <strong>Never plug in a found USB device.</strong> Hand it directly to IT Security.</p></div>
+
+  <div class="rule-box"><div class="card-label">Daily habit</div><p>Before you walk away from your desk: <strong>Win+L → file documents → visual check.</strong> Make it automatic.</p></div>
+
+  <div class="nav-btns"><button class="btn" onclick="go(4)">← Previous</button><button class="btn primary" onclick="go(6)">Take the Quiz →</button></div>
 </div>
 
 <!-- QUIZ -->
-<div id="quiz-section" class="section">
-  <div class="quiz-header">
-    <div class="section-num">Final Assessment</div>
-    <h2>Knowledge Check</h2>
-    <p style="margin-top:0.5rem;">10 questions covering all five modules. You need <strong style="color:var(--text)">7 or more correct (70%)</strong> to pass. Read each question carefully.</p>
+<div class="page" id="p6">
+  <div class="quiz-intro">
+    <h2>Knowledge Assessment</h2>
+    <p>10 questions across all five modules. Answer carefully — some options are close.</p>
+    <div class="quiz-meta"><span>10 questions</span><span>70% to pass</span><span>Unlimited retakes</span></div>
   </div>
-
-  <div id="quiz-questions"></div>
-  <button class="btn primary" id="quiz-submit" onclick="submitQuiz()" style="display:none">Submit Assessment</button>
-  <div id="quiz-result" class="hidden"></div>
-  <div id="quiz-nav" class="section-nav hidden">
-    <button class="btn" onclick="goTo(0)">← Back to Home</button>
-    <button class="btn primary" id="retake-btn" onclick="resetQuiz()">Retake Quiz</button>
+  <div id="qlist"></div>
+  <button class="btn primary" id="qsubmit" onclick="submitQ()" style="margin-top:1rem;display:none">Submit Assessment</button>
+  <div id="qresult" class="hidden"></div>
+  <div id="qnav" class="nav-btns hidden">
+    <button class="btn" onclick="go(0)">← Home</button>
+    <button class="btn primary" id="retakebtn" onclick="resetQ()">Retake Quiz</button>
   </div>
 </div>
 
 <script>
-const MODULES = ['home-section','section-1','section-2','section-3','section-4','section-5','quiz-section'];
+const PAGES = 7;
 const LABELS = ['Home','Phishing','Passwords','AUP','Incidents','Physical','Quiz'];
-let currentSection = 0;
-let completed = new Set();
+let cur = 0;
+let done = new Set();
 
-const questions = [
-  { q: "You receive an email from 'it-helpdesk@akg-support.net' asking you to reset your VPN password urgently. What should you do?", options: ["Click the link and reset immediately", "Reply asking for more details", "Report using the Outlook 'Report Phishing' button and contact IT", "Forward it to your manager"], correct: 2, explain: "The domain is suspicious — AKG's legitimate domain is akg.com. Report via the built-in phishing button and call IT Security." },
-  { q: "You receive 3 unexpected Microsoft Authenticator push notifications asking you to approve a sign-in you didn't initiate. What is this likely?", options: ["A system glitch — approve one to clear them", "An MFA fatigue attack — deny all and change your password immediately", "IT testing the MFA system", "Your phone syncing with a new device"], correct: 1, explain: "This is a classic MFA fatigue attack. Deny all prompts, change your password immediately, and report to IT Security." },
-  { q: "What is the minimum password length required for AKG corporate accounts?", options: ["8 characters", "10 characters", "12 characters", "14 characters"], correct: 3, explain: "AKG policy requires a minimum of 14 characters for all corporate account passwords." },
-  { q: "A colleague asks to borrow your access badge for 10 minutes because they forgot theirs. What should you do?", options: ["Lend it — it's just 10 minutes", "Escort them to where they need to go and retrieve your badge", "Refuse and direct them to reception to get a temporary visitor badge", "Let them borrow it after noting the time"], correct: 2, explain: "Access badges are personal and non-transferable. Direct your colleague to reception for a temporary badge — do not lend yours." },
-  { q: "You accidentally sent an email containing a confidential contract to the wrong external recipient. What is your first action?", options: ["Send a follow-up asking them to delete it", "Wait to see if they reply before escalating", "Report it as a security incident to IT Security immediately", "Ask your manager without telling IT"], correct: 2, explain: "Accidental data disclosure is a security incident. Report it to IT Security immediately — early notification enables containment and may be required under data protection regulations." },
-  { q: "Which of the following is acceptable under AKG's Acceptable Use Policy?", options: ["Installing a personal VPN client to improve browsing speed", "Using a personal USB drive to transfer work files", "Accessing personal email briefly during a break on a corporate device", "Storing confidential files in your personal Google Drive"], correct: 2, explain: "Limited personal use of corporate devices is tolerated. However, unauthorized software, personal storage, and personal USB drives are all prohibited." },
-  { q: "What is the correct keyboard shortcut to lock your Windows workstation before leaving your desk?", options: ["Ctrl + Alt + Del then Lock", "Windows key + L", "Ctrl + L", "Alt + F4"], correct: 1, explain: "Windows key + L is the fastest way to lock your workstation immediately. Make it a habit every time you leave your desk." },
-  { q: "You find a USB drive in the car park with 'AKG Q3 Financials' written on it. What do you do?", options: ["Plug it into your computer to see if it belongs to a colleague", "Hand it to reception without plugging it in", "Leave it where you found it", "Plug it into a personal device to check the contents"], correct: 1, explain: "Never plug in an unknown USB device — this is a known 'USB drop' attack. Hand it to reception or IT Security without connecting it to any device." },
-  { q: "IT Security calls and asks for your domain password to resolve an account issue. What do you do?", options: ["Provide it since it's a legitimate IT request", "Ask them to email you instead before providing it", "Refuse — IT will never ask for your password — and report the call", "Give them a temporary password only"], correct: 2, explain: "Legitimate IT staff will never ask for your password. This is a social engineering attempt. Refuse and report the call to it-security@akg.com." },
-  { q: "Which statement about the clean desk policy is correct?", options: ["You only need to clear your desk at the end of the day", "You can leave documents out if you're returning within 30 minutes", "You must lock your screen and secure documents any time you leave your desk, even briefly", "The policy applies only to employees with Confidential or Restricted data"], correct: 2, explain: "The clean desk policy applies every time you leave your workstation — not just at end of day. Lock your screen and secure all materials immediately." }
+const Qs = [
+  { q: "You get an email from 'it-support@akg-helpdesk.net' asking you to urgently reset your VPN password. What do you do?", opts: ["Click the link immediately", "Reply asking for more details", "Use 'Report Phishing' in Outlook, then call IT", "Forward it to your manager"], c: 2, exp: "The domain 'akg-helpdesk.net' is not AKG's domain. Use the Report Phishing button and call Ext. 2200." },
+  { q: "You receive 3 unexpected Microsoft Authenticator push notifications you didn't trigger. What is this most likely?", opts: ["A system glitch — approve one", "An MFA fatigue attack — deny all, change password, report to IT", "IT testing the system", "Your phone syncing with a new device"], c: 1, exp: "This is a classic MFA fatigue attack. Deny all prompts, change your password, and call IT Security immediately." },
+  { q: "What is the minimum password length required for AKG corporate accounts?", opts: ["8 characters", "10 characters", "12 characters", "14 characters"], c: 3, exp: "AKG policy requires a minimum of 14 characters for all corporate accounts." },
+  { q: "A colleague forgot their access badge and asks to borrow yours for 10 minutes. What do you do?", opts: ["Lend it — it's only 10 minutes", "Escort them to where they need to go", "Refuse and direct them to reception for a temporary badge", "Let them borrow it and note the time"], c: 2, exp: "Access badges are personal and non-transferable. Direct your colleague to reception for a temporary badge." },
+  { q: "You accidentally sent a confidential contract to the wrong external email address. Your first action is?", opts: ["Send a follow-up asking them to delete it", "Wait to see if they reply before escalating", "Report it as a security incident to IT Security immediately", "Tell your manager but not IT"], c: 2, exp: "Accidental data disclosure is a security incident. Report to IT Security immediately — early notification enables containment." },
+  { q: "Which of these is acceptable under AKG's Acceptable Use Policy?", opts: ["Installing a personal VPN to improve speed", "Using a personal USB drive for work files", "Brief personal browsing on a corporate device during a break", "Saving confidential files in your personal Google Drive"], c: 2, exp: "Limited personal use on corporate devices is tolerated. Unauthorized software, personal USB drives, and personal cloud storage are prohibited." },
+  { q: "The fastest way to lock your Windows workstation before leaving your desk is?", opts: ["Ctrl + Alt + Del, then Lock", "Windows key + L", "Ctrl + L", "Alt + F4"], c: 1, exp: "Windows key + L locks your screen instantly. Practice it until it's automatic." },
+  { q: "You find a USB drive in the car park labelled 'AKG Q3 Salaries'. What do you do?", opts: ["Plug it in to find the owner", "Hand it to reception without plugging it in", "Leave it where you found it", "Plug it into your personal phone to check"], c: 1, exp: "Never plug in unknown USB devices — this is a USB drop attack. Hand it to IT Security without connecting it to anything." },
+  { q: "An IT caller says they need your password to fix an account issue. You should?", opts: ["Provide it — it's a legitimate IT request", "Give a temporary password only", "Refuse — IT never asks for your password — and report the call", "Ask them to send an email instead"], c: 2, exp: "Legitimate IT staff will never ask for your password. This is social engineering. Refuse and report to it-security@akg.com." },
+  { q: "Which statement about the clean desk policy is correct?", opts: ["Only applies at end of day", "You have a 30-minute grace period if returning soon", "Lock screen and secure documents any time you leave your desk, even briefly", "Only applies to staff with Confidential or Restricted data"], c: 2, exp: "The clean desk policy applies every single time you leave your workstation — not just at end of day." }
 ];
 
 function buildDots() {
-  const container = document.getElementById('nav-dots');
-  container.innerHTML = '';
-  MODULES.slice(1).forEach((_, i) => {
-    const d = document.createElement('div');
-    d.className = 'nav-dot' + (completed.has(i+1) ? ' done' : '') + (currentSection === i+1 ? ' active' : '');
-    container.appendChild(d);
-  });
+  const d = document.getElementById('pdots');
+  d.innerHTML = '';
+  for (let i = 1; i < PAGES; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'p-dot' + (done.has(i) ? ' done' : '') + (cur === i ? ' active' : '');
+    d.appendChild(dot);
+  }
 }
 
-function goTo(idx) {
-  MODULES.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.classList.remove('active');
-  });
-  const target = document.getElementById(MODULES[idx]);
-  if (target) { target.classList.add('active'); window.scrollTo(0,0); }
-  if (idx > 0 && idx < 6) completed.add(idx);
-  currentSection = idx;
+function go(idx) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('p' + idx).classList.add('active');
+  if (idx > 0 && idx < 6) done.add(idx);
+  cur = idx;
   buildDots();
+  window.scrollTo(0, 0);
   if (idx === 6) buildQuiz();
 }
 
 function buildQuiz() {
-  const container = document.getElementById('quiz-questions');
-  if (container.children.length > 0) return;
-  questions.forEach((q, qi) => {
+  const list = document.getElementById('qlist');
+  if (list.children.length > 0) return;
+  Qs.forEach((q, qi) => {
     const block = document.createElement('div');
     block.className = 'q-block';
-    block.innerHTML = `<div class="q-num">Question ${qi+1} of ${questions.length}</div>
+    block.innerHTML = `<div class="q-num">Question ${qi + 1} of ${Qs.length}</div>
       <div class="q-text">${q.q}</div>
-      <div class="q-options">
-        ${q.options.map((o,oi) => `<label class="q-option" id="opt-${qi}-${oi}">
-          <input type="radio" name="q${qi}" value="${oi}" onchange="selectOpt(${qi},${oi})"> ${o}
-        </label>`).join('')}
+      <div class="q-opts">
+        ${q.opts.map((o, oi) => `<label class="q-opt" id="opt${qi}_${oi}"><input type="radio" name="q${qi}" value="${oi}" onchange="selOpt(${qi},${oi})"> ${o}</label>`).join('')}
       </div>
-      <div class="q-feedback" id="fb-${qi}"></div>`;
-    container.appendChild(block);
+      <div class="q-fb" id="fb${qi}"></div>`;
+    list.appendChild(block);
   });
-  document.getElementById('quiz-submit').style.display = 'block';
+  document.getElementById('qsubmit').style.display = 'block';
 }
 
-function selectOpt(qi, oi) {
-  questions[qi].options.forEach((_,i) => {
-    const el = document.getElementById(`opt-${qi}-${i}`);
-    if (el) el.classList.toggle('selected', i === oi);
+function selOpt(qi, oi) {
+  Qs[qi].opts.forEach((_, i) => {
+    document.getElementById(`opt${qi}_${i}`).classList.toggle('selected', i === oi);
   });
 }
 
-function submitQuiz() {
+function submitQ() {
   let score = 0;
-  let allAnswered = true;
-  questions.forEach((q, qi) => {
-    const selected = document.querySelector(`input[name="q${qi}"]:checked`);
-    if (!selected) { allAnswered = false; return; }
-    const val = parseInt(selected.value);
-    const fb = document.getElementById(`fb-${qi}`);
-    questions[qi].options.forEach((_,i) => {
-      const el = document.getElementById(`opt-${qi}-${i}`);
-      if (el) { el.classList.remove('selected','correct','wrong'); el.querySelector('input').disabled = true; }
+  let allDone = true;
+  Qs.forEach((q, qi) => {
+    const sel = document.querySelector(`input[name="q${qi}"]:checked`);
+    if (!sel) { allDone = false; return; }
+    const val = parseInt(sel.value);
+    Qs[qi].opts.forEach((_, i) => {
+      const el = document.getElementById(`opt${qi}_${i}`);
+      el.classList.remove('correct', 'wrong');
+      el.querySelector('input').disabled = true;
     });
-    const correctEl = document.getElementById(`opt-${qi}-${q.correct}`);
-    if (correctEl) correctEl.classList.add('correct');
-    if (val === q.correct) {
-      score++;
-    } else {
-      const wrongEl = document.getElementById(`opt-${qi}-${val}`);
-      if (wrongEl) wrongEl.classList.add('wrong');
-    }
-    if (fb) { fb.textContent = q.explain; fb.className = `q-feedback show ${val === q.correct ? 'ok' : 'fail'}`; }
+    document.getElementById(`opt${qi}_${q.c}`).classList.add('correct');
+    if (val === q.c) { score++; } else { document.getElementById(`opt${qi}_${val}`).classList.add('wrong'); }
+    const fb = document.getElementById(`fb${qi}`);
+    fb.textContent = q.exp;
+    fb.className = `q-fb show ${val === q.c ? 'ok' : 'fail'}`;
   });
-  if (!allAnswered) { alert('Please answer all questions before submitting.'); return; }
-  document.getElementById('quiz-submit').style.display = 'none';
-  const pct = Math.round((score / questions.length) * 100);
+  if (!allDone) { alert('Please answer all 10 questions before submitting.'); return; }
+  document.getElementById('qsubmit').style.display = 'none';
+  const pct = Math.round((score / Qs.length) * 100);
   const pass = score >= 7;
-  const resultDiv = document.getElementById('quiz-result');
-  resultDiv.classList.remove('hidden');
-  resultDiv.innerHTML = pass
-    ? `<div class="result-card">
-        <div class="result-score pass">${score}/${questions.length}</div>
-        <div class="result-label">Score: ${pct}% — PASS</div>
-        <div class="result-verdict">Assessment passed</div>
-        <div class="result-sub">You have completed the AKG Security Awareness Training.</div>
-      </div>
-      <div class="completion-banner">
-        <div class="cert-icon">🛡️</div>
-        <div class="cert-title">Security Awareness Certified</div>
-        <div class="cert-sub">AKG IT Department — Onboarding Security Awareness Training</div>
-        <div class="cert-date">Completed: ${new Date().toLocaleDateString('en-GB', {day:'2-digit',month:'long',year:'numeric'})}</div>
-      </div>`
-    : `<div class="result-card">
-        <div class="result-score fail">${score}/${questions.length}</div>
-        <div class="result-label">Score: ${pct}% — FAIL (70% required)</div>
-        <div class="result-verdict">Assessment not passed</div>
-        <div class="result-sub">Review the modules above and retake the quiz. Focus on the questions marked in red.</div>
-      </div>`;
-  const nav = document.getElementById('quiz-nav');
+  const res = document.getElementById('qresult');
+  res.classList.remove('hidden');
+  res.innerHTML = `<div class="result-box">
+    <div class="result-score ${pass ? 'pass' : 'fail'}">${score} / ${Qs.length}</div>
+    <div class="result-verdict">${pass ? 'Assessment Passed' : 'Assessment Failed'}</div>
+    <div class="result-sub">Score: ${pct}% — ${pass ? 'Required: 70% ✓' : 'Required: 70% — please review and retake'}</div>
+  </div>` + (pass ? `<div class="cert">
+    <div class="cert-icon">🛡️</div>
+    <div class="cert-title">Security Awareness Certified</div>
+    <div class="cert-sub">AKG IT Department — New Employee Onboarding</div>
+    <div class="cert-date">Completed ${new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'long',year:'numeric'})}</div>
+  </div>` : '');
+  const nav = document.getElementById('qnav');
   nav.classList.remove('hidden');
-  if (pass) document.getElementById('retake-btn').style.display = 'none';
-  window.scrollTo(0, resultDiv.offsetTop - 80);
+  if (pass) document.getElementById('retakebtn').style.display = 'none';
+  res.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-function resetQuiz() {
-  document.getElementById('quiz-questions').innerHTML = '';
-  document.getElementById('quiz-result').classList.add('hidden');
-  document.getElementById('quiz-result').innerHTML = '';
-  document.getElementById('quiz-nav').classList.add('hidden');
+function resetQ() {
+  document.getElementById('qlist').innerHTML = '';
+  document.getElementById('qresult').innerHTML = '';
+  document.getElementById('qresult').classList.add('hidden');
+  document.getElementById('qnav').classList.add('hidden');
+  document.getElementById('retakebtn').style.display = '';
   buildQuiz();
-  window.scrollTo(0,0);
+  window.scrollTo(0, 0);
 }
 
 buildDots();
